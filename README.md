@@ -1,21 +1,25 @@
-# Looper Construction — Hero + Gallery Reel (v1)
+# Looper Construction — Full-bleed Editorial (v1)
 
-This is a **Vite + React + Tailwind** baseline with a **horizontal image reel** (Swiper).
-It’s intentionally minimal so you can iterate quickly.
+Light / beach-forward baseline:
+- Full-bleed hero image (uses `public/gallery/01.jpg` if present)
+- Editorial, image-led "Selected work" section (static for now)
+- Copy centralized in `src/content.js`
 
-## Run locally (optional)
+## Images
+Put your images in:
+- `public/gallery/01.jpg`
+- `public/gallery/02.jpg`
+- `public/gallery/03.jpg`
+- `public/gallery/04.jpg`
+
+If an image is missing, the layout shows a neutral placeholder block (so it never renders “blank white”).
+
+## Run (Codespaces / local)
 ```bash
 npm install
 npm run dev
 ```
 
-## Build (Netlify)
-```bash
-npm run build
-```
-Output: `dist/`
-
-## Notes
-- Replace placeholder gallery images in `public/gallery/`
-- Update copy in `src/content.js`
-- The gallery reel is implemented in `src/components/GalleryReel.jsx`
+## Netlify
+Build: `npm run build`  
+Publish: `dist`

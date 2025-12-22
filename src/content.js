@@ -1,7 +1,13 @@
 export const site = {
-  brand: {
-    name: "Looper Construction",
-    tagline: "Orange Beach • Gulf Coast",
+  brand: "Looper Construction",
+  taglineTop: "ORANGE BEACH · GULF COAST",
+  hero: {
+    headline: "Custom homes, thoughtfully built.",
+    subhead:
+      "Refined coastal residences — disciplined planning, precise execution, and finishes that endure.",
+    primaryCta: "Begin a conversation",
+    secondaryCta: "View selected work",
+    heroImage: "/gallery/01.jpg",
   },
   nav: [
     { label: "Services", href: "#services" },
@@ -9,33 +15,30 @@ export const site = {
     { label: "Work", href: "#work" },
     { label: "Contact", href: "#contact" },
   ],
-  hero: {
-    eyebrow: "Orange Beach • Gulf Coast",
-    headline: "Custom homes, thoughtfully built.",
-    subhead:
-      "We build refined coastal homes across Alabama’s Gulf Coast and Pensacola — guided by clarity, craftsmanship, and a quiet standard of excellence. No noise. No rush.",
-    primaryCta: { label: "Begin a conversation", href: "#contact" },
-    secondaryCta: { label: "View selected work", href: "#work" },
-  },
-  gallery: {
-    title: "Selected Work",
-    subtitle:
-      "A horizontal reel—quiet, minimal, and image‑led. Replace these placeholders with real project photography.",
-    items: Array.from({ length: 10 }).map((_, i) => ({
-      src: `/gallery/${String(i + 1).padStart(2, "0")}.jpg`,
-      label: [
-        "Coastal Modern",
-        "Timeless Gulf Cottage",
-        "Courtyard Retreat",
-        "White Oak Residence",
-        "Harbor View",
-        "Dune House",
-        "Seaside Classic",
-        "Island Pavilion",
-        "Pensacola Revival",
-        "Orange Beach Estate",
-      ][i],
-      meta: "Orange Beach / Gulf Coast",
-    })),
-  },
+  work: [
+    {
+      title: "Gulf-front custom residence",
+      location: "Orange Beach, AL",
+      image: "/gallery/01.jpg",
+      note: "A calm, modern coastal home designed for long-term livability.",
+    },
+    {
+      title: "Courtyard home with indoor-outdoor flow",
+      location: "Gulf Coast",
+      image: "/gallery/02.jpg",
+      note: "Thoughtful circulation, durable materials, clean detailing.",
+    },
+    {
+      title: "Classic coastal, updated",
+      location: "Pensacola, FL",
+      image: "/gallery/03.jpg",
+      note: "Traditional proportions with a quietly contemporary finish palette.",
+    },
+    {
+      title: "Modern elevation + warm natural finishes",
+      location: "Gulf Coast",
+      image: "/gallery/04.jpg",
+      note: "Architectural clarity without excess — the details do the work.",
+    },
+  ],
 };
