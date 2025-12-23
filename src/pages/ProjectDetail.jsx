@@ -1,28 +1,22 @@
 import React, { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
-import { ImageReel } from "../components/ImageReel";
 import { siteContent } from "../content/siteContent";
 
 export default function ProjectDetail() {
   const { type, slug } = useParams();
-
-  const section =
-    type === "commercial" ? siteContent.projects.commercial : siteContent.projects.residential;
-
-  const project = useMemo(
-    () => section.items.find((i) => i.slug === slug),
-    [section.items, slug]
-  );
+  const project = (siteContent.projects?.[type] || []).find((p) => p.slug === slug);
 
   const images = useMemo(() => {
-    // Later: load from content file or a folder convention.
-    // For now: placeholders only.
-    return new Array(10).fill(0).map((_, i) => ({
-      src: "/images/placeholder.svg",
+    // Convention:
+    //   public/projects/<type>/<slug>/01.jpg ... 12.jpg
+    // If none exist, we fall back to placeholders so the page never goes “blank white”.
+    const base = `/projects/${type}/${slug}`;
+    return new Array(12).fill(0).map((_, i) => ({
+      src: `${base}/${String(i + 1).padStart(2, "0")}.jpg`,
       alt: `${project?.title || "Project"} image ${i + 1}`,
     }));
-  }, [project]);
+  }, [type, slug, project]);
 
   if (!project) {
     return (
@@ -30,11 +24,17 @@ export default function ProjectDetail() {
         <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
           <h1 className="text-2xl font-semibold tracking-tight">Project not found</h1>
           <p className="mt-3 text-sm text-neutral-600">
-            This is a placeholder structure. Add the project slug to `src/content/siteContent.js`.
+            Add this project to <code className="rounded bg-neutral-100 px-2 py-1">src/content/siteContent.js</code>{" "}
+            under <code className="rounded bg-neutral-100 px-2 py-1">projects.{type}</code>.
           </p>
-          <Link to={`/projects/${type}`} className="mt-6 inline-flex rounded-2xl bg-neutral-900 px-4 py-2 text-sm font-medium text-white">
-            Back
-          </Link>
+          <div className="mt-6">
+            <Link
+              to={`/projects/${type}`}
+              className="rounded-full border border-neutral-200 bg-white px-5 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
+            >
+              Back to {type}
+            </Link>
+          </div>
         </section>
       </Layout>
     );
@@ -42,74 +42,70 @@ export default function ProjectDetail() {
 
   return (
     <Layout>
-      <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <div className="text-xs font-semibold tracking-wide text-neutral-500">
-              {type === "commercial" ? "COMMERCIAL PROJECT" : "RESIDENTIAL PROJECT"}
+      <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="max-w-3xl">
+            <div className="text-xs font-medium tracking-widest text-neutral-500">
+              {project.location || (type === "commercial" ? "Commercial" : "Residential")}
             </div>
-            <h1 className="mt-1 text-3xl font-semibold tracking-tight md:text-4xl">{project.title}</h1>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-600">
-              Placeholder detail view. Keep the structure; swap in real photography + short descriptions later.
-            </p>
+            <h1 className="mt-3 text-4xl font-semibold tracking-tight md:text-5xl">{project.title}</h1>
+            {project.summary ? (
+              <p className="mt-5 text-base leading-relaxed text-neutral-600">{project.summary}</p>
+            ) : null}
           </div>
-
           <Link
             to={`/projects/${type}`}
-            className="inline-flex items-center justify-center rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 shadow-sm transition hover:bg-neutral-50 hover:-translate-y-0.5"
+            className="rounded-full border border-neutral-200 bg-white px-5 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
           >
-            Back to {section.title}
+            Back to {type}
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-12 md:items-start">
-          <div className="md:col-span-7">
-            <div className="overflow-hidden rounded-3xl border border-neutral-200 bg-neutral-50 shadow-sm">
-              <img src={project.cover} alt={project.title} className="h-[440px] w-full object-cover" />
-            </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {/* Left: main image */}
+          <div className="overflow-hidden rounded-3xl border border-neutral-200 bg-neutral-100">
+            <img
+              src={project.cover}
+              alt={project.title}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
           </div>
 
-          <div className="md:col-span-5">
-            <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
-              <div className="text-sm font-semibold tracking-tight">At a glance</div>
-              <ul className="mt-4 space-y-3 text-sm text-neutral-700">
-                <li className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
-                  <span>Quiet, editorial presentation (readable for 50+ audience).</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
-                  <span>Subtle hover cues (soft lift; no obnoxious highlights).</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-900" />
-                  <span>Gallery reel is mouse/trackpad-friendly (no scroll-jack).</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="mt-6 rounded-3xl border border-neutral-200 bg-neutral-50 p-6">
-              <div className="text-sm font-semibold tracking-tight">Future enhancement (optional)</div>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-700">
-                Add a “download full album” link, or a deeper story section with 2–3 sentences and a few key specs.
-              </p>
+          {/* Right: details */}
+          <div className="rounded-3xl border border-neutral-200 bg-white p-6">
+            <h2 className="text-lg font-semibold tracking-tight">Project notes</h2>
+            <div className="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700">
+              {project.details?.length
+                ? project.details.map((d, i) => <p key={i}>{d}</p>)
+                : [
+                    <p key="placeholder">
+                      This page is wired for real project media. Drop images into{" "}
+                      <code className="rounded bg-neutral-100 px-2 py-1">public/projects/{type}/{slug}/</code>{" "}
+                      and they will load automatically.
+                    </p>,
+                  ]}
             </div>
           </div>
         </div>
 
+        {/* Image strip */}
         <div className="mt-10">
-          <ImageReel images={images} />
-        </div>
-
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {["Design", "Build", "Finish"].map((t) => (
-            <div key={t} className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
-              <div className="text-sm font-semibold tracking-tight">{t}</div>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-600">
-                Short placeholder copy. Keep it to one sentence for readability.
-              </p>
-            </div>
-          ))}
+          <h2 className="text-lg font-semibold tracking-tight">Gallery</h2>
+          <div className="mt-4 flex gap-4 overflow-x-auto pb-3">
+            {images.map((img) => (
+              <div
+                key={img.src}
+                className="relative h-40 w-64 shrink-0 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100"
+              >
+                <img src={img.src} alt={img.alt} className="h-full w-full object-cover" loading="lazy" />
+                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5" />
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-neutral-500">
+            Tip: keep images roughly consistent (e.g., 2560×1920). We can add thumbnails later if needed.
+          </p>
         </div>
       </section>
     </Layout>

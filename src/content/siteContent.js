@@ -51,106 +51,122 @@ export const siteContent = {
     "mission": "Loper Construction's foundation was built with a simple goal & vision in mind... To go out and live a daily commitment to excellence in building."
   },
   "projects": {
-    "residential": {
-      "title": "Residential",
-      "items": [
-        {
-          "title": "a-Scarborough",
-          "slug": "a-scarborough",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "coastal-charm",
-          "slug": "coastal-charm",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "country-charm",
-          "slug": "country-charm",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "Elberta Estate- -888968e3",
-          "slug": "elberta-estate-888968e3",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "island-pearl",
-          "slug": "island-pearl",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "island-serenity",
-          "slug": "island-serenity",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "kickin-back-1",
-          "slug": "kickin-back-1",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "McCabe Exterior",
-          "slug": "mccabe-exterior",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "med-flair",
-          "slug": "med-flair",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "Muller home",
-          "slug": "muller-home",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "Parks Home",
-          "slug": "parks-home",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "simply-stunning",
-          "slug": "simply-stunning",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "Slaughter",
-          "slug": "slaughter",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "swank-posh",
-          "slug": "swank-posh",
-          "cover": "/images/placeholder.svg"
-        }
-      ]
+    "hero": {
+      "eyebrow": "PROJECTS",
+      "title": "Residential + Commercial",
+      "subtitle": "A balanced portfolio. A quiet standard. One team."
     },
-    "commercial": {
-      "title": "Commercial",
-      "items": [
-        {
-          "title": "Wharf Marina Store",
-          "slug": "wharf-marina-store",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "Kilwins",
-          "slug": "kilwins",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "Our Coffee",
-          "slug": "our-coffee",
-          "cover": "/images/placeholder.svg"
-        },
-        {
-          "title": "The Wharf Outfitters",
-          "slug": "wharf-outfitters",
-          "cover": "/images/placeholder.svg"
-        }
-      ]
-    }
+    "meta": {
+      "legacy": "Building along the Gulf Coast since 1980.",
+      "discipline": "Clear communication, steady scheduling, clean delivery.",
+      "range": "Custom homes, retail, restaurants, and specialty builds."
+    },
+    "highlights": {
+      "residentialTitle": "Residential",
+      "residentialSubtitle": "Custom homes",
+      "residentialBlurb": "Curated selection (3) to keep the page balanced — fewer words, bigger type, calmer pacing.",
+      "residentialImage": "/gallery/01.jpg",
+      "commercialTitle": "Commercial",
+      "commercialSubtitle": "Public-facing work",
+      "commercialBlurb": "A slightly cooler presentation — more context, more location, and a little more “city” energy without being loud.",
+      "commercialImage": "/gallery/02.jpg"
+    },
+    "listMeta": {
+      "residential": {
+        "title": "Residential projects",
+        "subtitle": "Quiet, image-led presentation — designed to feel intuitive, not flashy."
+      },
+      "commercial": {
+        "title": "Commercial projects",
+        "subtitle": "Location-forward and outcome-forward — designed for fast scanning and easy navigation."
+      }
+    },
+    "featuredResidential": [
+      {
+        "title": "The Wharf",
+        "slug": "the-wharf",
+        "location": "Orange Beach, AL",
+        "cover": "/gallery/03.jpg",
+        "summary": "Featured residential project (placeholder).",
+        "details": []
+      },
+      {
+        "title": "Kilian’s",
+        "slug": "kilians",
+        "location": "Orange Beach, AL",
+        "cover": "/gallery/04.jpg",
+        "summary": "Featured residential project (placeholder).",
+        "details": []
+      },
+      {
+        "title": "Outfitters",
+        "slug": "outfitters",
+        "location": "Orange Beach, AL",
+        "cover": "/gallery/05.jpg",
+        "summary": "Featured residential project (placeholder).",
+        "details": []
+      }
+    ],
+    "residential": [
+      {
+        "title": "The Wharf",
+        "slug": "the-wharf",
+        "location": "Orange Beach, AL",
+        "cover": "/gallery/03.jpg",
+        "summary": "Residential project (placeholder).",
+        "details": []
+      },
+      {
+        "title": "Kilian’s",
+        "slug": "kilians",
+        "location": "Orange Beach, AL",
+        "cover": "/gallery/04.jpg",
+        "summary": "Residential project (placeholder).",
+        "details": []
+      },
+      {
+        "title": "Outfitters",
+        "slug": "outfitters",
+        "location": "Orange Beach, AL",
+        "cover": "/gallery/05.jpg",
+        "summary": "Residential project (placeholder).",
+        "details": []
+      },
+      {
+        "title": "Coffee Shop",
+        "slug": "coffee-shop",
+        "location": "Orange Beach, AL",
+        "cover": "/gallery/06.jpg",
+        "summary": "Residential project (placeholder).",
+        "details": []
+      }
+    ],
+    "commercial": [
+      {
+        "title": "Commercial Project One",
+        "slug": "commercial-1",
+        "location": "Gulf Coast",
+        "cover": "/gallery/07.jpg",
+        "summary": "Commercial project (placeholder).",
+        "details": []
+      },
+      {
+        "title": "Commercial Project Two",
+        "slug": "commercial-2",
+        "location": "Gulf Coast",
+        "cover": "/gallery/08.jpg",
+        "summary": "Commercial project (placeholder).",
+        "details": []
+      },
+      {
+        "title": "Commercial Project Three",
+        "slug": "commercial-3",
+        "location": "Gulf Coast",
+        "cover": "/gallery/09.jpg",
+        "summary": "Commercial project (placeholder).",
+        "details": []
+      }
+    ]
   },
   "footer": {
     "tagline": "Committed to excellence in building since 1980. Licensed, Bonded and Insured.",
