@@ -8,7 +8,6 @@ import Projects from "./pages/Projects";
 import ProjectList from "./pages/ProjectList";
 import ProjectDetail from "./pages/ProjectDetail";
 import Awards from "./pages/Awards";
-import Gold from "./pages/Gold";
 import Contact from "./pages/Contact";
 
 export default function App() {
@@ -22,7 +21,6 @@ export default function App() {
         <Route path="/projects/:type" element={<ProjectList />} />
         <Route path="/projects/:type/:slug" element={<ProjectDetail />} />
         <Route path="/awards" element={<Awards />} />
-        <Route path="/gold-fortification" element={<Gold />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Home />} />
       </Routes>
