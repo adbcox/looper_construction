@@ -1,63 +1,62 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
-import { Container } from "../components/Container";
+import { siteContent } from "../content/siteContent";
 
-function Card({ title, subtitle, to }) {
+function ProjectCard({ item, type }) {
   return (
     <Link
-      to={to}
-      className="group rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-50"
+      to={`/projects/${type}/${item.slug}`}
+      className="group overflow-hidden rounded-3xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-0.5"
     >
-      <div className="text-sm font-semibold tracking-tight">{title}</div>
-      {subtitle ? <div className="mt-1 text-xs text-neutral-500">{subtitle}</div> : null}
-      <div className="mt-4 text-xs font-medium text-neutral-900">Open →</div>
+      <div className="relative">
+        <img
+          src={item.cover}
+          alt={item.title}
+          className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-neutral-900/20 via-neutral-900/0 to-neutral-900/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      </div>
+      <div className="p-5">
+        <div className="text-sm font-semibold tracking-tight">{item.title}</div>
+        <div className="mt-1 text-xs text-neutral-500">View project</div>
+      </div>
     </Link>
   );
 }
 
 export default function ProjectList() {
   const { type } = useParams();
-  const label = type === "commercial" ? "Commercial" : "Residential";
 
-  const items =
-    type === "commercial"
-      ? [
-          { title: "Wharf Marina Store", slug: "wharf-marina-store" },
-          { title: "Kilwins", slug: "kilwins" },
-          { title: "Our Coffee", slug: "our-coffee" },
-        ]
-      : [
-          { title: "Residence One", slug: "residence-one" },
-          { title: "Residence Two", slug: "residence-two" },
-          { title: "Residence Three", slug: "residence-three" },
-        ];
+  const section =
+    type === "commercial" ? siteContent.projects.commercial : siteContent.projects.residential;
 
   return (
     <Layout>
-      <section className="py-14">
-        <Container>
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h1 className="text-3xl font-semibold tracking-tight">{label} Projects</h1>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-600">
-                Placeholder index. Next step: map real project titles + photo sets from the downloaded site assets.
-              </p>
-            </div>
-            <Link
-              to="/projects"
-              className="hidden rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-50 md:inline-flex"
-            >
-              Back to Projects
-            </Link>
+      <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="text-xs font-semibold tracking-wide text-neutral-500">PROJECTS</div>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight md:text-4xl">{section.title}</h1>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-neutral-600">
+              Curated overview. Click into a project to see the reel + full set layout.
+            </p>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {items.map((p) => (
-              <Card key={p.slug} title={p.title} subtitle={label} to={`/projects/${type}/${p.slug}`} />
-            ))}
-          </div>
-        </Container>
+          <Link
+            to="/projects"
+            className="inline-flex items-center justify-center rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 shadow-sm transition hover:bg-neutral-50 hover:-translate-y-0.5"
+          >
+            Back to Projects
+          </Link>
+        </div>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {section.items.map((item) => (
+            <ProjectCard key={item.slug} item={item} type={type} />
+          ))}
+        </div>
       </section>
     </Layout>
   );

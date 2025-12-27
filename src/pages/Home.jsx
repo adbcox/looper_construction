@@ -1,222 +1,121 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Layout } from "../components/Layout";
-import { Container } from "../components/Container";
 import { siteContent } from "../content/siteContent";
 
-function Pill({ children }) {
+function RightNavBlocks() {
   return (
-    <span className="inline-flex items-center rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs text-neutral-700 shadow-sm">
-      {children}
-    </span>
-  );
-}
+    <div className="hidden w-full max-w-sm md:block">
+      <div className="space-y-3">
+        {siteContent.home.rightNav.map((item) => (
+          <Link
+            key={item.to}
+            to={item.to}
+            className="group block rounded-3xl border border-white/30 bg-white/12 p-5 shadow-sm backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:bg-white/18 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white/50"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="text-base font-semibold tracking-tight text-white transition-transform duration-200 group-hover:scale-[1.03]">
+                  {item.label}
+                </div>
+                <div className="mt-1 text-sm text-white/80 transition-transform duration-200 group-hover:scale-[1.02]">
+                  {item.sub}
+                </div>
+              </div>
+              <div className="mt-0.5 h-8 w-8 rounded-2xl border border-white/25 bg-white/10 transition group-hover:bg-white/15" />
+            </div>
+          </Link>
+        ))}
+      </div>
 
-function SectionLabel({ children }) {
-  return (
-    <div className="text-xs font-medium uppercase tracking-widest text-neutral-500">
-      {children}
+      <div className="mt-4 rounded-3xl border border-white/25 bg-white/10 p-5 text-xs text-white/75 backdrop-blur">
+        Hover a section to preview where you’re headed. This is subtle on purpose—technology that helps without
+        calling attention to itself.
+      </div>
     </div>
   );
 }
 
 export default function Home() {
-  const c = siteContent.home;
+  const hero = siteContent.home.heroMedia;
 
   return (
-    <Layout>
-      <section className="relative overflow-hidden border-b border-neutral-100">
-        <div
-          className="absolute inset-0"
-          aria-hidden="true"
-          style={{
-            background:
-              "radial-gradient(1200px 600px at 20% 10%, rgba(0,0,0,0.06), transparent 60%), radial-gradient(900px 500px at 80% 40%, rgba(0,0,0,0.04), transparent 55%), linear-gradient(180deg, rgba(250,250,250,1), rgba(255,255,255,1))",
-          }}
-        />
-        <Container className="relative py-14 md:py-20">
-          <div className="grid gap-10 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-7">
-              <div className="flex flex-wrap gap-2">
-                <Pill>{c.eyebrow}</Pill>
-                <Pill>Quiet luxury</Pill>
-                <Pill>Clear delivery</Pill>
-              </div>
+    <section className="relative">
+      {/* Full-bleed hero media */}
+      <div className="absolute inset-0 -z-10">
+        {hero.type === "video" ? (
+          <video
+            className="h-full w-full object-cover"
+            src={hero.src}
+            poster={hero.poster}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img className="h-full w-full object-cover" src={hero.src} alt={hero.alt} />
+        )}
 
-              <h1 className="mt-6 text-4xl font-semibold tracking-tight md:text-6xl">
-                {c.headline}
-              </h1>
+        {/* Light, coastal wash (no “dark mode”) */}
+        <div className="absolute inset-0 bg-white/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/35 via-white/10 to-white/55" />
+      </div>
 
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg">
-                {c.subhead}
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Link
-                  to={c.primaryCta.to}
-                  className="inline-flex items-center justify-center rounded-2xl bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
-                >
-                  {c.primaryCta.label}
-                </Link>
-                <Link
-                  to={c.secondaryCta.to}
-                  className="inline-flex items-center justify-center rounded-2xl border border-neutral-200 bg-white px-6 py-3 text-sm font-medium text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-50"
-                >
-                  {c.secondaryCta.label}
-                </Link>
-              </div>
-            </div>
-
-            <div className="md:col-span-5">
-              <div className="rounded-3xl border border-neutral-200 bg-white/70 p-3 shadow-sm backdrop-blur">
-                <div className="relative overflow-hidden rounded-2xl border border-neutral-100">
-                  <div
-                    className="aspect-[4/3] w-full"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(0,0,0,0.08), rgba(0,0,0,0.02)), url('/images/hero-placeholder.jpg') center/cover no-repeat",
-                    }}
-                  />
-                  <div className="absolute inset-x-0 bottom-0 bg-white/75 px-4 py-3 backdrop-blur">
-                    <div className="text-xs font-medium text-neutral-700">
-                      Placeholder hero photography
-                    </div>
-                    <div className="mt-0.5 text-xs text-neutral-500">
-                      Swap to an aerial / coastal image later (no decisions today).
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-3 grid gap-3">
-                  <div className="rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-xs text-neutral-700 shadow-sm">
-                    Subtle hover + elevation cues (older-audience friendly).
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div className="mx-auto grid min-h-[78vh] max-w-6xl items-end gap-10 px-4 pb-14 pt-16 md:grid-cols-12 md:items-center md:pt-20">
+        {/* Left: editorial hero copy */}
+        <div className="md:col-span-7">
+          <div className="inline-flex items-center rounded-full border border-white/35 bg-white/15 px-4 py-2 text-xs font-medium tracking-tight text-white shadow-sm backdrop-blur">
+            {siteContent.home.badge}
           </div>
-        </Container>
-      </section>
 
-      <section className="py-14 md:py-16">
-        <Container>
+          <h1 className="mt-6 max-w-xl text-4xl font-semibold tracking-tight text-white md:text-6xl">
+            {siteContent.home.headline}
+          </h1>
+
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 md:text-lg">
+            {siteContent.home.intro}
+          </p>
+
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              to={siteContent.home.ctaPrimary.to}
+              className="inline-flex items-center justify-center rounded-2xl bg-white px-6 py-3 text-sm font-semibold text-neutral-900 shadow-sm transition hover:bg-white/90"
+            >
+              {siteContent.home.ctaPrimary.label}
+            </Link>
+
+            <Link
+              to={siteContent.home.ctaSecondary.to}
+              className="inline-flex items-center justify-center rounded-2xl border border-white/35 bg-white/10 px-6 py-3 text-sm font-semibold text-white shadow-sm backdrop-blur transition hover:bg-white/15"
+            >
+              {siteContent.home.ctaSecondary.label}
+            </Link>
+          </div>
+        </div>
+
+        {/* Right: block-nav with hover “raise + text grow” */}
+        <div className="md:col-span-5 md:justify-self-end">
+          <RightNavBlocks />
+        </div>
+      </div>
+
+      {/* Below-hero anchor to reduce “dead-end” feel */}
+      <div className="border-t border-neutral-100 bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-10">
           <div className="grid gap-6 md:grid-cols-3">
-            {c.featureBlocks.map((b) => (
-              <Link
-                key={b.to}
-                to={b.to}
-                className="group rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-50"
-              >
-                <div className="text-sm font-semibold tracking-tight">{b.title}</div>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{b.desc}</p>
-                <div className="mt-4 text-xs font-medium text-neutral-900">Explore →</div>
-              </Link>
+            {[
+              { t: "Residential", d: "Custom coastal homes with timeless materials and a calm build process." },
+              { t: "Commercial", d: "Local destinations and spaces built for performance and longevity." },
+              { t: "Communication", d: "A modern workflow that feels simple: clear steps, fewer surprises." },
+            ].map((c) => (
+              <div key={c.t} className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+                <div className="text-sm font-semibold tracking-tight">{c.t}</div>
+                <div className="mt-2 text-sm leading-relaxed text-neutral-600">{c.d}</div>
+              </div>
             ))}
           </div>
-        </Container>
-      </section>
-
-      <section className="border-t border-neutral-100 py-14 md:py-16">
-        <Container>
-          <div className="grid gap-10 md:grid-cols-12">
-            <div className="md:col-span-4">
-              <SectionLabel>Projects</SectionLabel>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight">
-                A balanced view of the work.
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-neutral-600">
-                Residential and commercial are presented with equal clarity. This is a structured
-                preview — we’ll map the real names + images next.
-              </p>
-
-              <div className="mt-6 flex gap-3">
-                <Link
-                  to="/projects/residential"
-                  className="rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-50"
-                >
-                  Residential
-                </Link>
-                <Link
-                  to="/projects/commercial"
-                  className="rounded-2xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-50"
-                >
-                  Commercial
-                </Link>
-              </div>
-            </div>
-
-            <div className="md:col-span-8">
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
-                  <div className="text-sm font-semibold tracking-tight">Featured Residential</div>
-                  <div className="mt-4 space-y-3">
-                    {c.featuredResidential.map((p) => (
-                      <Link
-                        key={p.title}
-                        to={p.to}
-                        className="block rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-800 shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-50"
-                      >
-                        <div className="font-medium">{p.title}</div>
-                        <div className="mt-0.5 text-xs text-neutral-500">{p.note}</div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
-                  <div className="text-sm font-semibold tracking-tight">Featured Commercial</div>
-                  <div className="mt-4 space-y-3">
-                    {c.featuredCommercial.map((p) => (
-                      <Link
-                        key={p.title}
-                        to={p.to}
-                        className="block rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-800 shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-50"
-                      >
-                        <div className="font-medium">{p.title}</div>
-                        <div className="mt-0.5 text-xs text-neutral-500">{p.note}</div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 rounded-3xl border border-neutral-200 bg-neutral-50 p-6">
-                <div className="text-sm font-semibold tracking-tight">Next mapping step</div>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">
-                  Once you approve this homepage structure, we’ll map the live site text verbatim
-                  into About / Process, and then build the project index + project detail pages with the real
-                  image sets you’ve already pulled.
-                </p>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="border-t border-neutral-100 py-14 md:py-16">
-        <Container>
-          <div className="rounded-3xl border border-neutral-200 bg-white p-8 shadow-sm md:p-10">
-            <div className="grid gap-6 md:grid-cols-12 md:items-center">
-              <div className="md:col-span-8">
-                <h3 className="text-xl font-semibold tracking-tight">
-                  Ready to talk through a project?
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-600">
-                  Simple next step: contact. Later we can add a calm intake flow — without cluttering the experience.
-                </p>
-              </div>
-              <div className="md:col-span-4 md:text-right">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center rounded-2xl bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
-                >
-                  Contact
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </Layout>
+        </div>
+      </div>
+    </section>
   );
 }
