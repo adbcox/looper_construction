@@ -1,0 +1,6 @@
+"scripts": {
+  "dev": "vite",
+  "check:imports": "node scripts/check-imports.mjs",
+  "build": "npm run check:imports && vite build",
+  "preview": "vite preview"
+}
