@@ -26,8 +26,9 @@ function ProjectCard({ item, type }) {
   );
 }
 
-export default function ProjectList() {
-  const { type } = useParams();
+export default function ProjectList({ forcedType } = {}) {
+  const params = useParams();
+  const type = forcedType ?? params.type;
 
   const section =
     type === "commercial" ? siteContent.projects.commercial : siteContent.projects.residential;
